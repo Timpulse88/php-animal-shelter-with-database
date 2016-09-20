@@ -1,0 +1,23 @@
+<html>
+<head>
+    <title>To Do List</title>
+</head>
+<body>
+    <h1>Edit {{ specie.type }}</h1>
+
+    <form action="/species/{{ specie.getId }}" method="post">
+      <input name="_method" type="hidden" value="patch">
+
+      <label for="name">Rename your Species:</label>
+      <input id="name" name="name" type="text">
+
+      <button type="submit">Update</button>
+  </form>
+    <form action="/species/{{ specie.getId }}" method="post">
+          <input name="_method" type="hidden" value="delete">
+          <button type="submit">Delete this Species</button>
+    </form>
+    <p><a href="/species/{{ specie.getId }}/edit">Edit Species Name</a></p>
+    <p><a href='/'>Home</a></p>
+</body>
+</html>

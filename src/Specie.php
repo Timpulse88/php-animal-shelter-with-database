@@ -81,5 +81,15 @@
             }
             return $profiles;
         }
+        function update($new_type)
+        {
+            $GLOBALS['DB']->exec("UPDATE species SET type = '{$new_type}' WHERE id = {$this->getId()};");
+            $this->setType($new_type);
+        }
+        function delete()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM species WHERE id = {$this->getId()};");
+            $GLOBALS['DB']->exec("DELETE FROM profiles WHERE specie_id = {$this->getId()};");
+        }
     }
 ?>

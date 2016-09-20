@@ -11,6 +11,7 @@
     // Initialize application
     $app = new Silex\Application();
 
+
     // Set Silex debug mode in $app object
     $app['debug'] = true;
 
@@ -22,6 +23,9 @@
     $app->register(new Silex\Provider\TwigServiceProvider(), array(
         'twig.path' => __DIR__.'/../views'
     ));
+
+    use Symfony\Component\HttpFoundation\Request;
+    Request::enableHttpMethodParameterOverride();
 
     $app->get("/", function() use ($app) {
         //$all = Specie::getAll();
@@ -41,12 +45,6 @@
         return $app['twig']->render('species.html.twig', array('specie' => $specie, 'profiles' => $specie->getProfiles()));
     });
 
-
-    // $app->get("/profiles", function() use ($app) {
-    //     return $app['twig']->render('profiles.html.twig', array('profiles' => Profile::getAll()));
-    // });
-    //
-
     $app->post("/profiles", function() use ($app) {
         $name = $_POST['name'];
         $specie_id = $_POST['specie_id'];
@@ -59,18 +57,22 @@
         //var_dump($specie);
         return $app['twig']->render('species.html.twig', array('specie' => $specie, 'profiles' => $specie->getProfiles()));
     });
-    //
-    // $app->post("/delete_profiles", function() use ($app) {
-    //     Profile::deleteAll();
-    //     return $app['twig']->render('index.html.twig');
-    // });
-    //
+    $app->get("/species/{id}/edit", function($id) use ($app) {
+        $specie = Specie::find($id);
+        return $app['twig']->render('edit.html.twig', array('specie' => $specie));
+    });
 
-    //
-    // $app->post("/delete_species", function() use ($app) {
-    //     Specie::deleteAll();
-    //     return $app['twig']->render('index.html.twig');
-    // });
+    $app->patch("/species/{id}", function($id) use ($app) {
+        $name = $_POST['name'];
+        $specie = Specie::find($id);
+        $specie->update($name);
+        return $app['twig']->render('species.html.twig', array('specie' => $specie, 'profiles' => $specie->getProfiles()));
+    });
+    $app->delete("/species/{id}", function($id) use ($app) {
+        $species = Specie::find($id);
+        $species->delete();
+        return $app['twig']->render('index.html.twig', array('species' => Specie::getAll()));
+    });
 
     return $app;
 ?>
