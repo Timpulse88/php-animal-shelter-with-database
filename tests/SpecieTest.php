@@ -5,42 +5,42 @@
     * @backupStaticAttributes disabled
     */
 
-    // require_once "src/Category.php";
-    // require_once "src/Task.php";
-    //
-    // $server = 'mysql:host=localhost;dbname=to_do_test';
-    // $username = 'root';
-    // $password = 'root';
-    // $DB = new PDO($server, $username, $password);
-    //
-    // class CategoryTest extends PHPUnit_Framework_TestCase
-    // {
-    //
-    //     protected function tearDown()
-    //     {
-    //       Category::deleteAll();
-    //       Task::deleteAll();
-    //     }
-    //
-    //     function test_getName()
-    //     {
-    //         //Arrange
-    //         $name = "Work stuff";
-    //         $test_Category = new Category($name);
-    //
-    //         //Act
-    //         $result = $test_Category->getName();
-    //
-    //         //Assert
-    //         $this->assertEquals($name, $result);
-    //     }
+    require_once "src/Specie.php";
+    require_once "src/Profile.php";
+
+    $server = 'mysql:host=localhost;dbname=animal_shelter_test';
+    $username = 'root';
+    $password = 'root';
+    $DB = new PDO($server, $username, $password);
+
+    class SpecieTest extends PHPUnit_Framework_TestCase
+    {
+
+        protected function tearDown()
+        {
+          Profile::deleteAll();
+          Specie::deleteAll();
+        }
+
+        function test_getType()
+        {
+            //Arrange
+            $type = "Dog";
+            $test_Specie = new Specie(null, $type);
+
+            //Act
+            $result = $test_Specie->getType();
+
+            //Assert
+            $this->assertEquals($type, $result);
+        }
     //
     //     function test_getId()
     //     {
     //         //Arrange
     //         $name = "Work stuff";
     //         $id = 1;
-    //         $test_Category = new Category($name, $id);
+    //         $test_Specie = new Category($name, $id);
     //
     //         //Act
     //         $result = $test_Category->getId();
@@ -63,22 +63,22 @@
     //         $this->assertEquals($test_Category, $result[0]);
     //     }
     //
-    //     function test_getAll()
-    //     {
-    //         //Arrange
-    //         $name = "Work stuff";
-    //         $name2 = "Home stuff";
-    //         $test_Category = new Category($name);
-    //         $test_Category->save();
-    //         $test_Category2 = new Category($name2);
-    //         $test_Category2->save();
-    //
-    //         //Act
-    //         $result = Category::getAll();
-    //
-    //         //Assert
-    //         $this->assertEquals([$test_Category, $test_Category2], $result);
-    //     }
+        function test_getAll()
+        {
+            //Arrange
+            $type = "dog";
+            $type2 = "cat";
+            $test_Specie = new Specie(null, $type);
+            $test_Specie->save();
+            $test_Specie2 = new Specie(null, $type2);
+            $test_Specie2->save();
+
+            //Act
+            $result = Specie::getAll();
+
+            //Assert
+            $this->assertEquals([$test_Specie, $test_Specie2], $result);
+        }
     //
     //     function test_deleteAll()
     //     {
@@ -140,5 +140,5 @@
     //         $this->assertEquals([$test_task, $test_task2], $result);
     //     }
     // }
-
+}
 ?>

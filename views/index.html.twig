@@ -1,0 +1,29 @@
+<html>
+<head>
+    <title>Animal Shelter</title>
+</head>
+<body>
+    <h1>Welcome to Animal Shelter</h1>
+
+    <p>Create a new specie:</p>
+
+    <form action="/species" method="post">
+        <label for="name">Category name:</label>
+        <input id="name" name="name" type="text">
+
+        <button type="submit">Add specie</button>
+    </form>
+
+    {% if species is not empty %}
+        <p>Here are all your species:</p>
+        <ul>
+            {% for specie in species %}
+                <li><a href="/species/{{ specie.getId }}">{{ specie.getType }}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+      <p>There are no species yet!</p>
+    {% endif %}
+
+</body>
+</html>

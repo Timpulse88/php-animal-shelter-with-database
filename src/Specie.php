@@ -36,11 +36,13 @@
         {
             $returned_species = $GLOBALS['DB']->query("SELECT * FROM species;");
             $species = array();
-            foreach($returned_species as $specie) {
-                $type = $specie['type'];
-                $id = $specie['id'];
-                $new_specie = new Specie($id, $type);
-                array_push($species, $new_specie);
+            if(!empty($returned_species)){
+                foreach($returned_species as $specie) {
+                    $type = $specie['type'];
+                    $id = $specie['id'];
+                    $new_specie = new Specie($id, $type);
+                    array_push($species, $new_specie);
+                }
             }
             return $species;
         }
