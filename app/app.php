@@ -51,7 +51,8 @@
         $gender = $_POST['gender'];
         $admittance_date = $_POST['admittance_date'];
         $breed = $_POST['breed'];
-        $profile = new Profile(null, $name, $gender, $breed, $specie_id, $admittance_date);
+        $url = $_POST['url'];
+        $profile = new Profile(null, $name, $gender, $breed, $specie_id, $admittance_date, $url);
         $profile->save();
         $specie = Specie::find($specie_id);
         //var_dump($specie);

@@ -76,7 +76,8 @@
                 $id = $profile['id'];
                 $admittance_date = $profile['admittance_date'];
                 $specie_id = $profile['specie_id'];
-                $new_profile = new Profile($id, $name, $gender, $breed, $specie_id, $admittance_date);
+                $url = $profile['url'];
+                $new_profile = new Profile($id, $name, $gender, $breed, $specie_id, $admittance_date, $url);
                 array_push($profiles, $new_profile);
             }
             return $profiles;

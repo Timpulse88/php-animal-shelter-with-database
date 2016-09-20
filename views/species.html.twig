@@ -10,6 +10,7 @@
         <ul>
             {% for profile in profiles %}
                 <li>{{ profile.getName }} {{ profile.gender }}</li>
+                <img src= "{{ profile.getUrl }}" alt="" />
             {% endfor %}
         </ul>
     {% endif %}
@@ -26,6 +27,8 @@
         <input name='admittance_date' type='date'>
         <label>Breed</label>
         <input name='breed' type='text'>
+        <label for="">Enter A URL for an image to your pet:</label>
+        <input name="url" type="text">
         <button type='submit'>Add {{ specie.type }}</button>
     </form>
     <p><a href="/species/{{ specie.getId }}/edit">Edit Species Name</a></p>

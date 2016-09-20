@@ -7,8 +7,9 @@
         private $breed;
         private $id;
         private $specie_id;
+        private $url;
 
-        function __construct($id = null, $name, $gender, $breed, $specie_id, $admittance_date)
+        function __construct($id = null, $name, $gender, $breed, $specie_id, $admittance_date, $url)
         {
             $this->name = $name;
             $this->gender = $gender;
@@ -16,6 +17,7 @@
             $this->id = $id;
             $this->specie_id = $specie_id;
             $this->admittance_date = $admittance_date;
+            $this->url = $url;
         }
         function setName($new_name)
         {
@@ -60,17 +62,22 @@
         {
             return $this->admittance_date;
         }
+        function getUrl()
+        {
+            return $this->url;
+        }
 
 
 
         function save()
         {
-            $GLOBALS['DB']->exec("INSERT INTO profiles (name, gender, breed, specie_id, admittance_date) VALUES (
+            $GLOBALS['DB']->exec("INSERT INTO profiles (name, gender, breed, specie_id, admittance_date, url) VALUES (
              '{$this->getName()}',
              '{$this->getGender()}',
               '{$this->getBreed()}',
                {$this->getSpecieId()},
-               '{$this->getAdmittanceDate()}')");
+               '{$this->getAdmittanceDate()}',
+                '{$this->getUrl()}')");
 
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
@@ -87,7 +94,8 @@
                     $id = $profile['id'];
                     $admittance_date = $profile['admittance_date'];
                     $specie_id = $profile['specie_id'];
-                    $new_profile = new Profile($id, $name, $gender, $breed, $specie_id, $admittance_date);
+                    $url = $profile['url'];
+                    $new_profile = new Profile($id, $name, $gender, $breed, $specie_id, $admittance_date, $url);
                     array_push($profiles, $new_profile);
                 }
             //}
