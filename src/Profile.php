@@ -8,8 +8,9 @@
         private $id;
         private $specie_id;
         private $url;
+        private $score;
 
-        function __construct($id = null, $name, $gender, $breed, $specie_id, $admittance_date, $url)
+        function __construct($id = null, $name, $gender, $breed, $specie_id, $admittance_date, $url, $score=0)
         {
             $this->name = $name;
             $this->gender = $gender;
@@ -18,6 +19,7 @@
             $this->specie_id = $specie_id;
             $this->admittance_date = $admittance_date;
             $this->url = $url;
+            $this->score = $score;
         }
         function setName($new_name)
         {
@@ -65,6 +67,12 @@
         function getUrl()
         {
             return $this->url;
+        }
+        function getScore(){
+            return $this->score;
+        }
+        function setScore($new_score){
+            return $this->score;
         }
 
 
@@ -118,6 +126,12 @@
                 }
             }
             return $found_profile;
+        }
+        function update()
+        {
+            $score = $this->score +=1;
+            $GLOBALS['DB']->exec("UPDATE species SET score = {$score} WHERE id = {$this->getId()};");
+            $this->setScore($score);
         }
     }
 ?>

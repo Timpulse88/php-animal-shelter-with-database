@@ -10,7 +10,11 @@
         <ul>
             {% for profile in profiles %}
                 <li>{{ profile.getName }} {{ profile.gender }}</li>
-                <img src= "{{ profile.getUrl }}" alt="" />
+                <img src= "{{ profile.getUrl }}" alt="" /><span>{{profile.score}}</span>
+                <form action="/profile/{{ profile.getId }}" method="post">
+                     <input name="_method" type="hidden" value="patch">
+                     <button type="submit" name="button">"Like" this animal!</button>
+                </form>
             {% endfor %}
         </ul>
     {% endif %}

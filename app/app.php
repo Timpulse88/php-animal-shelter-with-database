@@ -69,6 +69,13 @@
         $specie->update($name);
         return $app['twig']->render('species.html.twig', array('specie' => $specie, 'profiles' => $specie->getProfiles()));
     });
+
+    $app->patch("/profile/{id}", function($id) use ($app) {
+        $profile = Profile::find($id);
+        $specie = Specie::find($id);
+        $profile->update();
+        return $app['twig']->render('species.html.twig', array('specie' => $specie, 'profiles' => $specie->getProfiles()));
+    });
     $app->delete("/species/{id}", function($id) use ($app) {
         $species = Specie::find($id);
         $species->delete();
