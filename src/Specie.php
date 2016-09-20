@@ -65,21 +65,21 @@
             return $found_specie;
         }
 
-        function getSpecies()
+        function getProfiles()
         {
-            $species = Array();
-            $returned_species = $GLOBALS['DB']->query("SELECT * FROM species WHERE specie_id = {$this->getId()} ORDER BY type;");
-            foreach($returned_species as $specie) {
-                $name = $specie['name'];
-                $gender = $specie['gender'];
-                $breed = $specie['breed'];
-                $id = $specie['id'];
-                $admittance_date = $specie['admittance_date'];
-                $specie_id = $specie['specie_id'];
-                $new_specie = new Profile($id, $name, $gender, $breed, $specie_id, $admittance_date);
-                array_push($species, $new_specie);
+            $profiles = Array();
+            $returned_profiles = $GLOBALS['DB']->query("SELECT * FROM profiles WHERE specie_id = {$this->getId()} ORDER BY admittance_date;");
+            foreach($returned_profiles as $profile) {
+                $name = $profile['name'];
+                $gender = $profile['gender'];
+                $breed = $profile['breed'];
+                $id = $profile['id'];
+                $admittance_date = $profile['admittance_date'];
+                $specie_id = $profile['specie_id'];
+                $new_profile = new Profile($id, $name, $gender, $breed, $specie_id, $admittance_date);
+                array_push($profiles, $new_profile);
             }
-            return $species;
+            return $profiles;
         }
     }
 ?>

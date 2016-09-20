@@ -68,16 +68,16 @@
             //Arrange
             $type = "dog";
             $type2 = "cat";
-            $test_Specie = new Specie(null, $type);
+            $test_Specie = new Specie("2", $type);
             $test_Specie->save();
-            $test_Specie2 = new Specie(null, $type2);
-            $test_Specie2->save();
+            // $test_Specie2 = new Specie(3, $type2);
+            // $test_Specie2->save();
 
             //Act
             $result = Specie::getAll();
 
             //Assert
-            $this->assertEquals([$test_Specie, $test_Specie2], $result);
+            $this->assertEquals([$test_Specie], $result);
         }
     //
     //     function test_deleteAll()

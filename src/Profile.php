@@ -65,7 +65,13 @@
 
         function save()
         {
-            $GLOBALS['DB']->exec("INSERT INTO profiles (name, gender, breed, id, admittance_date, specie_id) VALUES ('{$this->getName()}','{$this->getGender()}', '{$this->getBreed()}', {$this->getId()}, '{$this->getAdmittanceDate()}',  {$this->getSpecieId()})");
+            $GLOBALS['DB']->exec("INSERT INTO profiles (name, gender, breed, specie_id, admittance_date) VALUES (
+             '{$this->getName()}',
+             '{$this->getGender()}',
+              '{$this->getBreed()}',
+               {$this->getSpecieId()},
+               '{$this->getAdmittanceDate()}')");
+
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
@@ -73,16 +79,18 @@
         {
             $returned_profiles = $GLOBALS['DB']->query("SELECT * FROM profiles;");
             $profiles = array();
-            foreach($returned_profiles as $profile) {
-                $name = $profile['name'];
-                $gender = $profile['gender'];
-                $breed = $profile['breed'];
-                $id = $profile['id'];
-                $admittance_date = $profile['admittance_date'];
-                $specie_id = $profile['specie_id'];
-                $new_profile = new Profile($id, $name, $gender, $breed, $specie_id, $admittance_date);
-                array_push($profiles, $new_profile);
-            }
+            //if(!empty($returned_profiles)){
+                foreach($returned_profiles as $profile) {
+                    $name = $profile['name'];
+                    $gender = $profile['gender'];
+                    $breed = $profile['breed'];
+                    $id = $profile['id'];
+                    $admittance_date = $profile['admittance_date'];
+                    $specie_id = $profile['specie_id'];
+                    $new_profile = new Profile($id, $name, $gender, $breed, $specie_id, $admittance_date);
+                    array_push($profiles, $new_profile);
+                }
+            //}
             return $profiles;
         }
 
